@@ -9,6 +9,7 @@
 #           rk90x,
 #           ap6xxx,
 #           ap6xxx_gps,      like ap6476
+#           ap6xxx_nfc,      like ap6441 & ap6493
 #
 # for mtk wifi, bt
 # MediaTek: 
