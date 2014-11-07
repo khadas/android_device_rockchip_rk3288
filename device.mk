@@ -14,24 +14,13 @@
 # limitations under the License.
 #
 
-# Use the non-open-source parts, if they're present
--include vendor/rockchip/rk3288/BoardConfigVendor.mk
--include device/rockchip/rksdk/BoardConfig.mk
+PRODUCT_PROPERTY_OVERRIDES := \
+    wifi.interface=wlan0 \
+    ro.opengles.version=196609 \
+    ro.sf.lcd_density=320 \
 
-TARGET_ARCH := arm
-TARGET_ARCH_VARIANT := armv7-a-neon
-TARGET_CPU_ABI := armeabi-v7a
-TARGET_CPU_ABI2 := armeabi
-TARGET_CPU_VARIANT := cortex-a15
-TARGET_CPU_SMP := true
+# setup dalvik vm configs.
+$(call inherit-product, frameworks/native/build/tablet-10in-xhdpi-2048-dalvik-heap.mk)
 
-TARGET_BOARD_PLATFORM := rk3288
-TARGET_BOARD_PLATFORM_GPU := Mali-T760
-#TARGET_BOARD_INFO_FILE := device/rockchip/rk3288/board-info.txt
 
-#TARGET_BUILD_JAVA_SUPPORT_LEVEL := platform
-
-# Include an expanded selection of fonts
-EXTENDED_FONT_FOOTPRINT := true
-
-#MALLOC_IMPL := dlmalloc
+$(call inherit-product-if-exists, vendor/rockchip/rk3288/device-vendor.mk)
