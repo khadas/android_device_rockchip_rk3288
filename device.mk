@@ -19,6 +19,9 @@ PRODUCT_PROPERTY_OVERRIDES := \
     ro.opengles.version=196609 \
     ro.sf.lcd_density=320 \
 
+PRODUCT_PACKAGES += \
+    Launcher3
+
 # setup dalvik vm configs.
 $(call inherit-product, frameworks/native/build/tablet-10in-xhdpi-2048-dalvik-heap.mk)
 
