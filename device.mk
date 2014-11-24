@@ -22,6 +22,14 @@ PRODUCT_PROPERTY_OVERRIDES := \
 PRODUCT_PACKAGES += \
     Launcher3
 
+#enable this for support f2fs with data partion
+#BOARD_USERDATAIMAGE_FILE_SYSTEM_TYPE := f2fs
+# This ensures the needed build tools are available.
+# TODO: make non-linux builds happy with external/f2fs-tool; system/extras/f2fs_utils
+#ifeq ($(HOST_OS),linux)
+#TARGET_USERIMAGES_USE_F2FS := true
+#endif
+
 # setup dalvik vm configs.
 $(call inherit-product, frameworks/native/build/tablet-10in-xhdpi-2048-dalvik-heap.mk)
 
