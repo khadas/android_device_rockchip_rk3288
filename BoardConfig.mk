@@ -34,7 +34,7 @@ TARGET_BOARD_PLATFORM_GPU := Mali-T760
 # Include an expanded selection of fonts
 EXTENDED_FONT_FOOTPRINT := true
 
-#MALLOC_IMPL := dlmalloc
+MALLOC_IMPL := dlmalloc
 
 # Sensors
 BOARD_SENSOR_ST := false
