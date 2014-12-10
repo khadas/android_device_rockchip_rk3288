@@ -16,7 +16,7 @@
 
 # Use the non-open-source parts, if they're present
 -include vendor/rockchip/rk3288/BoardConfigVendor.mk
--include device/rockchip/rksdk/BoardConfig.mk
+-include device/rockchip/common/BoardConfig.mk
 
 TARGET_ARCH := arm
 TARGET_ARCH_VARIANT := armv7-a-neon
