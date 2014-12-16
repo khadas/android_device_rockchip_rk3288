@@ -35,11 +35,3 @@ $(call inherit-product, frameworks/native/build/tablet-10in-xhdpi-2048-dalvik-he
 
 
 $(call inherit-product-if-exists, vendor/rockchip/rk3288/device-vendor.mk)
-
-ifeq ($(strip BUILD_WITH_GOOGLE_MARKET), true)
-ifeq ($(strip BUILD_WITH_GOOGLE_MARKET_ALL), true)
-$(call inherit-product-if-exists, vendor/google/products/gms.mk)
-else
-$(call inherit-product-if-exists, vendor/google/products/gms_mini.mk)
-endif
-endif
