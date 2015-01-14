@@ -40,3 +40,12 @@ MALLOC_IMPL := dlmalloc
 BOARD_SENSOR_ST := false
 BOARD_SENSOR_MPU := true
 BOARD_USES_GENERIC_INVENSENSE := false
+
+# ------------ #
+# radical_update
+# $(info to set RECOVERY_WITH_RADICAL_UPDATE to true)
+RECOVERY_WITH_RADICAL_UPDATE := true
+
+# cert to verify radical_update_pkg.
+RADICAL_UPDATE_CERT := $(TARGET_RELEASETOOLS_EXTENSIONS)/radical_update/certs/radical_update.x509.pem
+# ------------ #
