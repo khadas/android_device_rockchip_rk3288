@@ -18,6 +18,8 @@ include device/rockchip/rk3288/BoardConfig.mk
 $(call inherit-product, device/rockchip/rk3288/device.mk)
 $(call inherit-product, device/rockchip/common/device.mk)
 
+PRODUCT_CHARACTERISTICS := tablet
+
 PRODUCT_NAME := rk3288
 PRODUCT_DEVICE := rk3288
 PRODUCT_BRAND := Android
