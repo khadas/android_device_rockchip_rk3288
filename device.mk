@@ -17,6 +17,10 @@
 PRODUCT_PACKAGES += \
     Launcher3
 
+#$_rbox_$_modify_$_zhengyang: add displayd
+PRODUCT_PACKAGES += \
+    displayd
+
 #enable this for support f2fs with data partion
 #BOARD_USERDATAIMAGE_FILE_SYSTEM_TYPE := f2fs
 # This ensures the needed build tools are available.
