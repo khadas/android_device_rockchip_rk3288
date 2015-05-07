@@ -13,7 +13,16 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 #
+$(call inherit-product, device/rockchip/rk3288/rk3288.mk)
 
-PRODUCT_MAKEFILES := \
-        $(LOCAL_DIR)/rk3288.mk \
-        $(LOCAL_DIR)/rk3288_box.mk
+
+PRODUCT_NAME := rk3288_box
+PRODUCT_DEVICE := rk3288_box
+PRODUCT_BRAND := Android
+PRODUCT_MODEL := rk3288_box
+PRODUCT_MANUFACTURER := rockchip
+
+PRODUCT_PROPERTY_OVERRIDES += \
+    ro.product.version = 1.0.0 \
+    ro.product.ota.host = www.rockchip.com:2300
+

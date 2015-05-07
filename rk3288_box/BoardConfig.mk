@@ -13,7 +13,6 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 #
+include device/rockchip/rk3288/BoardConfig.mk
 
-PRODUCT_MAKEFILES := \
-        $(LOCAL_DIR)/rk3288.mk \
-        $(LOCAL_DIR)/rk3288_box.mk
+TARGET_BOARD_PLATFORM_PRODUCT := box

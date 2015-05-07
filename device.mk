@@ -29,6 +29,19 @@ PRODUCT_PACKAGES += \
 #TARGET_USERIMAGES_USE_F2FS := true
 #endif
 
+#######for target product ########
+ifeq ($(strip $(TARGET_BOARD_PLATFORM_PRODUCT)), box)
+
+PRODUCT_PROPERTY_OVERRIDES += \
+        ro.target.product=box
+else
+  PRODUCT_PROPERTY_OVERRIDES += \
+        ro.target.product=tablet
+endif
+
+PRODUCT_COPY_FILES += \
+    device/rockchip/rk3288/init.rc:root/init.rc
+
 # setup dalvik vm configs.
 $(call inherit-product, frameworks/native/build/tablet-10in-xhdpi-2048-dalvik-heap.mk)
 
