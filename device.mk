@@ -43,6 +43,10 @@ endif
 PRODUCT_COPY_FILES += \
     device/rockchip/rk3288/init.rc:root/init.rc
 
+PRODUCT_COPY_FILES += \
+    device/rockchip/rk3288/fstab.rk30board.bootmode.unknown:root/fstab.rk30board.bootmode.unknown \
+    device/rockchip/rk3288/fstab.rk30board.bootmode.emmc:root/fstab.rk30board.bootmode.emmc
+
 # setup dalvik vm configs.
 $(call inherit-product, frameworks/native/build/tablet-10in-xhdpi-2048-dalvik-heap.mk)
 
