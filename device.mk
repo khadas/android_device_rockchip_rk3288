@@ -29,17 +29,6 @@ PRODUCT_PACKAGES += \
 #TARGET_USERIMAGES_USE_F2FS := true
 #endif
 
-#######for target product ########
-ifeq ($(strip $(TARGET_BOARD_PLATFORM_PRODUCT)), box)
-DEVICE_PACKAGE_OVERLAYS += device/rockchip/rk3288/overlay_screenoff
-
-PRODUCT_PROPERTY_OVERRIDES += \
-        ro.target.product=box
-else
-  PRODUCT_PROPERTY_OVERRIDES += \
-        ro.target.product=tablet
-endif
-
 PRODUCT_COPY_FILES += \
     device/rockchip/rk3288/init.rc:root/init.rc
 
