@@ -32,9 +32,15 @@ PRODUCT_PACKAGES += \
 PRODUCT_COPY_FILES += \
     device/rockchip/rk3288/init.rc:root/init.rc
 
+ifeq ($(strip $(TARGET_BOARD_PLATFORM_PRODUCT)), box)
 PRODUCT_COPY_FILES += \
     device/rockchip/rk3288/fstab.rk30board.bootmode.unknown:root/fstab.rk30board.bootmode.unknown \
+    device/rockchip/rk3288/rk3288_box/fstab.rk30board.bootmode.emmc:root/fstab.rk30board.bootmode.emmc
+else
+  PRODUCT_COPY_FILES += \
+    device/rockchip/rk3288/fstab.rk30board.bootmode.unknown:root/fstab.rk30board.bootmode.unknown \
     device/rockchip/rk3288/fstab.rk30board.bootmode.emmc:root/fstab.rk30board.bootmode.emmc
+endif
 
 # setup dalvik vm configs.
 $(call inherit-product, frameworks/native/build/tablet-10in-xhdpi-2048-dalvik-heap.mk)
