@@ -30,9 +30,8 @@ PRODUCT_PACKAGES += \
 #endif
 
 ifeq ($(strip $(TARGET_BOARD_PLATFORM_PRODUCT)), box)
-BOARD_SEPOLICY_DIRS := device/rockchip/rk3288/rk3288_box/sepolicy
-BOARD_SEPOLICY_UNION := \
-      service_contexts
+BOARD_SEPOLICY_UNION += \
+      device/rockchip/rk3288/rk3288_box/sepolicy/service_contexts
 
 PRODUCT_COPY_FILES += \
     device/rockchip/rk3288/rk3288_box/init.rc:root/init.rc \
