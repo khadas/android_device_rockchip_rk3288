@@ -52,7 +52,7 @@ RADICAL_UPDATE_CERT := $(TARGET_RELEASETOOLS_EXTENSIONS)/radical_update/certs/ra
 # ------------ #
 
 # Copy RK3288 own init.rc file
-TARGET_PROVIDES_INIT_RC := true
+#TARGET_PROVIDES_INIT_RC := true
 
 ifneq ($(filter %box, $(TARGET_PRODUCT)), )
 TARGET_BOARD_PLATFORM_PRODUCT ?= box

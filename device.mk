@@ -40,7 +40,7 @@ PRODUCT_COPY_FILES += \
     device/rockchip/rk3288/rk3288_box/fstab.rk30board.bootmode.emmc:root/fstab.rk30board.bootmode.emmc
 else
   PRODUCT_COPY_FILES += \
-    device/rockchip/rk3288/init.rc:root/init.rc \
+    device/rockchip/rk3288/fstab.rk30board.bootmode.emmc:root/fstab.rk30board \
     device/rockchip/rk3288/fstab.rk30board.bootmode.unknown:root/fstab.rk30board.bootmode.unknown \
     device/rockchip/rk3288/fstab.rk30board.bootmode.emmc:root/fstab.rk30board.bootmode.emmc
 endif
