@@ -1,5 +1,5 @@
 #
-# Copyright 2014 The Android Open Source Project
+# Copyright 2014 The Android Open-Source Project
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -13,9 +13,16 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 #
+$(call inherit-product, device/rockchip/rk3288/rk3288.mk)
 
-add_lunch_combo rk3288-user
-add_lunch_combo rk3288-userdebug
-add_lunch_combo rk3288_box-userdebug
-add_lunch_combo rk3288_vr-userdebug
-add_lunch_combo rk3288-eng
+
+PRODUCT_NAME := rk3288_vr
+PRODUCT_DEVICE := rk3288_vr
+PRODUCT_BRAND := Rockchip
+PRODUCT_MODEL := rk3288_vr
+PRODUCT_MANUFACTURER := rockchip
+
+PRODUCT_PROPERTY_OVERRIDES += \
+    ro.product.version = 1.0.0 \
+    ro.product.ota.host = www.rockchip.com:2300
+

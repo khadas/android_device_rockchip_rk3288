@@ -1,5 +1,5 @@
 #
-# Copyright 2014 The Android Open Source Project
+# Copyright 2014 The Android Open-Source Project
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -13,9 +13,6 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 #
+include device/rockchip/rk3288/BoardConfig.mk
 
-add_lunch_combo rk3288-user
-add_lunch_combo rk3288-userdebug
-add_lunch_combo rk3288_box-userdebug
-add_lunch_combo rk3288_vr-userdebug
-add_lunch_combo rk3288-eng
+TARGET_BOARD_PLATFORM_PRODUCT := vr
