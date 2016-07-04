@@ -57,7 +57,11 @@ RADICAL_UPDATE_CERT := $(TARGET_RELEASETOOLS_EXTENSIONS)/radical_update/certs/ra
 ifneq ($(filter %box, $(TARGET_PRODUCT)), )
 TARGET_BOARD_PLATFORM_PRODUCT ?= box
 else
+ ifneq ($(filter %vr, $(TARGET_PRODUCT)), )
+   TARGET_BOARD_PLATFORM_PRODUCT ?= vr
+else
 TARGET_BOARD_PLATFORM_PRODUCT ?= tablet
+endif
 endif
 #######for target product ########
 ifeq ($(strip $(TARGET_BOARD_PLATFORM_PRODUCT)), box)
@@ -66,7 +70,11 @@ DEVICE_PACKAGE_OVERLAYS += device/rockchip/rk3288/overlay_screenoff
 PRODUCT_PROPERTY_OVERRIDES += \
         ro.target.product=box
 else
+  ifeq ($(strip $(TARGET_BOARD_PLATFORM_PRODUCT)), tablet)
   PRODUCT_PROPERTY_OVERRIDES += \
         ro.target.product=tablet
+  else
+     ro.target.product=vr
+  endif
 endif
 
