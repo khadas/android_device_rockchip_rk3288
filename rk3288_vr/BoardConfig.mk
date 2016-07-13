@@ -16,3 +16,6 @@
 include device/rockchip/rk3288/BoardConfig.mk
 
 TARGET_BOARD_PLATFORM_PRODUCT := vr
+BOARD_SENSOR_MPU_VR := true
+BOARD_SENSOR_MPU := false
+BOARD_SENSOR_ST := false
