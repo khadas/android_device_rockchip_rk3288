@@ -27,5 +27,6 @@ PRODUCT_PROPERTY_OVERRIDES += \
     ro.product.ota.host = www.rockchip.com:2300
 
 PRODUCT_COPY_FILES += \
-       device/rockchip/rk3288/rk3288_vr/inv-mpu-iio.ko:system/lib/modules/inv-mpu-iio.ko	\
+        device/rockchip/rk3288/rk3288_vr/bootanimation.zip:system/media/bootanimation.zip	\
+       device/rockchip/rk3288/rk3288_vr/rk_ovr.ko:system/lib/modules/rk_ovr.ko	\
        device/rockchip/rk3288/rk3288_vr/rk_util.ko:system/lib/modules/rk_util.ko
