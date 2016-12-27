@@ -28,5 +28,6 @@ PRODUCT_PROPERTY_OVERRIDES += \
 
 PRODUCT_COPY_FILES += \
         device/rockchip/rk3288/rk3288_vr/bootanimation.zip:system/media/bootanimation.zip	\
+        device/rockchip/rk3288/rk3288_vr/rk29-keypad.kl:system/usr/keylayout/rk29-keypad.kl \
        device/rockchip/rk3288/rk3288_vr/rk_ovr.ko:system/lib/modules/rk_ovr.ko	\
        device/rockchip/rk3288/rk3288_vr/rk_util.ko:system/lib/modules/rk_util.ko
