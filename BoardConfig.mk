@@ -26,8 +26,12 @@ TARGET_CPU_VARIANT := cortex-a15
 TARGET_CPU_SMP := true
 PRODUCT_PACKAGE_OVERLAYS += device/rockchip/rk3288/overlay
 
+
+# Disable emulator for "make dist" until there is a 64-bit qemu kernel
+BUILD_EMULATOR := false
 TARGET_BOARD_PLATFORM := rk3288
 TARGET_BOARD_PLATFORM_GPU := mali-t760
+BOARD_USE_DRM := true
 
 # Sensors
 BOARD_SENSOR_ST := false
