@@ -28,28 +28,12 @@ PRODUCT_PACKAGE_OVERLAYS += device/rockchip/rk3288/overlay
 
 TARGET_BOARD_PLATFORM := rk3288
 TARGET_BOARD_PLATFORM_GPU := mali-t760
-#TARGET_BOARD_INFO_FILE := device/rockchip/rk3288/board-info.txt
-
-#TARGET_BUILD_JAVA_SUPPORT_LEVEL := platform
-
-# Include an expanded selection of fonts
-EXTENDED_FONT_FOOTPRINT := true
-
-MALLOC_IMPL := dlmalloc
 
 # Sensors
 BOARD_SENSOR_ST := false
 BOARD_SENSOR_MPU := true
 BOARD_USES_GENERIC_INVENSENSE := false
 
-# ------------ #
-# radical_update
-# $(info to set RECOVERY_WITH_RADICAL_UPDATE to true)
-RECOVERY_WITH_RADICAL_UPDATE := true
-
-# cert to verify radical_update_pkg.
-RADICAL_UPDATE_CERT := $(TARGET_RELEASETOOLS_EXTENSIONS)/radical_update/certs/radical_update.x509.pem
-# ------------ #
 
 # Copy RK3288 own init.rc file
 #TARGET_PROVIDES_INIT_RC := true
@@ -78,3 +62,4 @@ else
   endif
 endif
 
+ENABLE_CPUSETS := true
