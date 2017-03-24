@@ -82,8 +82,8 @@ fi
 
 # build wifi ko
 echo "Start build wifi ko"
-lunch rk3328_box-userdebug
-source device/rockchip/common/build_wifi_ko.sh
+lunch rk3288-userdebug
+#source device/rockchip/common/build_wifi_ko.sh
 
 # build android
 echo "start build android"
@@ -119,35 +119,35 @@ fi
 #cp -f $IMAGE_PATH/* $PACK_TOOL_DIR/rockdev/Image/
 
 # copy images to rockdev
-echo "copy u-boot images"
+#echo "copy u-boot images"
 #cp u-boot/uboot.img $IMAGE_PATH/
 #cp u-boot/RK322XHMiniLoaderAll* $IMAGE_PATH/
 #cp u-boot/trust.img $IMAGE_PATH/
 
-echo "copy kernel images"
+#echo "copy kernel images"
 #cp kernel/resource.img $IMAGE_PATH/
 #cp kernel/kernel.img $IMAGE_PATH/
 
-echo "copy manifest.xml"
-cp manifest.xml $IMAGE_PATH/manifest_${DATE}.xml
+#echo "copy manifest.xml"
+#cp manifest.xml $IMAGE_PATH/manifest_${DATE}.xml
 
-echo "Make update.img"
-cp RKTools/linux/Linux_Pack_Firmware/rockdev/* $IMAGE_PATH
-cd $IMAGE_PATH && mkdir Image && ./mkupdate.sh
-if [ $? -eq 0 ]; then
-    echo "Make update image ok!"
-else
-    echo "Make update image failed!"
-    exit 1
-fi
-rm Image -rf
-cd -
+#echo "Make update.img"
+#cp RKTools/linux/Linux_Pack_Firmware/rockdev/* $IMAGE_PATH
+#cd $IMAGE_PATH && mkdir Image && ./mkupdate.sh
+#if [ $? -eq 0 ]; then
+#    echo "Make update image ok!"
+#else
+#    echo "Make update image failed!"
+#    exit 1
+#fi
+#rm Image -rf
+#cd -
 
 mkdir -p $STUB_PATH
 
 #Generate patches
 
-#.repo/repo/repo forall  -c '[ "$REPO_REMOTE" = "rk" -a "$REPO_RREV" != "refs/tags/android-6.0.1_r55" ] && { REMOTE_DIFF=`git log $REPO_REMOTE/$REPO_RREV..HEAD`; LOCAL_DIFF=`git diff`; [ -n "$REMOTE_DIFF" ] && { mkdir -p $STUB_PATCH_PATH/$REPO_PATH/; git format-patch $REPO_REMOTE/$REPO_RREV..HEAD -o $STUB_PATCH_PATH/$REPO_PATH; } || :; [ -n "$LOCAL_DIFF" ] && { mkdir -p $STUB_PATCH_PATH/$REPO_PATH/; git reset HEAD ./; git diff > $STUB_PATCH_PATH/$REPO_PATH/local_diff.patch; } || :; }'
+.repo/repo/repo forall  -c '[ "$REPO_REMOTE" = "rk" -a "$REPO_RREV" != "refs/tags/android-6.0.1_r55" ] && { REMOTE_DIFF=`git log $REPO_REMOTE/$REPO_RREV..HEAD`; LOCAL_DIFF=`git diff`; [ -n "$REMOTE_DIFF" ] && { mkdir -p $STUB_PATCH_PATH/$REPO_PATH/; git format-patch $REPO_REMOTE/$REPO_RREV..HEAD -o $STUB_PATCH_PATH/$REPO_PATH; } || :; [ -n "$LOCAL_DIFF" ] && { mkdir -p $STUB_PATCH_PATH/$REPO_PATH/; git reset HEAD ./; git diff > $STUB_PATCH_PATH/$REPO_PATH/local_diff.patch; } || :; }'
 
 #Copy stubs
 cp manifest.xml $STUB_PATH/manifest_${DATE}.xml
