@@ -72,7 +72,7 @@ fi
 
 # build kernel
 echo "Start build kernel"
-cd kernel && export CROSS_COMPILE=../prebuilts/gcc/linux-x86/arm/arm-linux-androideabi-4.9/bin/arm-linux-androideabi- && make ARCH=arm $KERNEL_DEFCONFIG && make ARCH=arm $KERNEL_DTS.img -j12 && cd -
+cd kernel && export CROSS_COMPILE=../prebuilts/gcc/linux-x86/arm/arm-linux-androideabi-4.9/bin/arm-linux-androidkernel- && make ARCH=arm $KERNEL_DEFCONFIG && make ARCH=arm $KERNEL_DTS.img -j12 && cd -
 if [ $? -eq 0 ]; then
     echo "Build kernel ok!"
 else
