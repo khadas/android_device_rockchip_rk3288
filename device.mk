@@ -22,12 +22,13 @@ PRODUCT_PACKAGES += \
     displayd
 
 #enable this for support f2fs with data partion
-#BOARD_USERDATAIMAGE_FILE_SYSTEM_TYPE := f2fs
+BOARD_USERDATAIMAGE_FILE_SYSTEM_TYPE := f2fs
+
 # This ensures the needed build tools are available.
 # TODO: make non-linux builds happy with external/f2fs-tool; system/extras/f2fs_utils
-#ifeq ($(HOST_OS),linux)
-#TARGET_USERIMAGES_USE_F2FS := true
-#endif
+ifeq ($(HOST_OS),linux)
+  TARGET_USERIMAGES_USE_F2FS := true
+endif
 
 ifeq ($(strip $(TARGET_BOARD_PLATFORM_PRODUCT)), box)
 BOARD_SEPOLICY_DIRS += \
