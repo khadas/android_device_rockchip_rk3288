@@ -67,3 +67,12 @@ else
 endif
 
 ENABLE_CPUSETS := true
+
+# Enable dex-preoptimization to speed up first boot sequence
+ifeq ($(HOST_OS),linux)
+    ifeq ($(TARGET_BUILD_VARIANT),user)
+        WITH_DEXPREOPT := true
+    else
+        WITH_DEXPREOPT := false
+    endif
+endif
