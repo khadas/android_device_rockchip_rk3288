@@ -45,7 +45,8 @@ DEVICE=`get_build_var TARGET_PRODUCT`
 BUILD_VARIANT=`get_build_var TARGET_BUILD_VARIANT`
 UBOOT_DEFCONFIG=rk3288_defconfig
 KERNEL_DEFCONFIG=rockchip_defconfig
-KERNEL_DTS=rk3288-evb-act8846
+KERNEL_DTS=rk3288-evb-rk818
+#KERNEL_DTS=rk3288-evb-act8846
 PACK_TOOL_DIR=RKTools/linux/Linux_Pack_Firmware
 IMAGE_PATH=rockdev/Image-$TARGET_PRODUCT
 export PROJECT_TOP=`gettop`
@@ -72,7 +73,7 @@ fi
 
 # build kernel
 echo "Start build kernel"
-cd kernel && export CROSS_COMPILE=../prebuilts/gcc/linux-x86/arm/arm-linux-androideabi-4.9/bin/arm-linux-androidkernel- && make ARCH=arm $KERNEL_DEFCONFIG && make ARCH=arm $KERNEL_DTS.img -j12 && cd -
+cd kernel && CROSS_COMPILE=../prebuilts/gcc/linux-x86/arm/arm-linux-androideabi-4.9/bin/arm-linux-androidkernel- && make ARCH=arm $KERNEL_DEFCONFIG && make ARCH=arm $KERNEL_DTS.img -j12 && cd -
 if [ $? -eq 0 ]; then
     echo "Build kernel ok!"
 else
@@ -158,7 +159,7 @@ cp kernel/vmlinux $STUB_PATCH_PATH/kernel
 
 mkdir -p $STUB_PATH/IMAGES/
 cp $IMAGE_PATH/* $STUB_PATH/IMAGES/
-
+cp build.sh $STUB_PATH/build.sh
 #Save build command info
 echo "UBOOT:  defconfig: $UBOOT_DEFCONFIG" >> $STUB_PATH/build_cmd_info
 echo "KERNEL: defconfig: $KERNEL_DEFCONFIG, dts: $KERNEL_DTS" >> $STUB_PATH/build_cmd_info
