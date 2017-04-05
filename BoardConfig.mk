@@ -67,7 +67,7 @@ else
 endif
 
 ENABLE_CPUSETS := true
-
+BOARD_SENSOR_MPU_PAD :=true
 # Enable dex-preoptimization to speed up first boot sequence
 ifeq ($(HOST_OS),linux)
     ifeq ($(TARGET_BUILD_VARIANT),user)
