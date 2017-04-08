@@ -43,7 +43,7 @@ export CLASSPATH=.:$JAVA_HOME/lib:$JAVA_HOME/lib/tools.jar
 # source environment and chose target product
 DEVICE=`get_build_var TARGET_PRODUCT`
 BUILD_VARIANT=`get_build_var TARGET_BUILD_VARIANT`
-UBOOT_DEFCONFIG=rk3288_defconfig
+UBOOT_DEFCONFIG=rk3288_normal_defconfig
 KERNEL_DEFCONFIG=rockchip_defconfig
 KERNEL_DTS=rk3288-evb-rk818
 #KERNEL_DTS=rk3288-evb-act8846
@@ -62,7 +62,7 @@ export STUB_PATCH_PATH=$STUB_PATH/PATCHES
 
 # build uboot
 echo "start build uboot"
-cd u-boot && make distclean && make $UBOOT_DEFCONFIG && make -j12 && cd -
+cd u-boot && make distclean && make $UBOOT_DEFCONFIG && ./mkv7.sh && cd -
 if [ $? -eq 0 ]; then
     echo "Build uboot ok!"
 else
@@ -117,32 +117,22 @@ if [ "$BUILD_OTA" = true ] ; then
     cp $OUT/$INTERNAL_OTA_PACKAGE_OBJ_TARGET $IMAGE_PATH/
 fi
 
-#cp -f $IMAGE_PATH/* $PACK_TOOL_DIR/rockdev/Image/
 
-# copy images to rockdev
-#echo "copy u-boot images"
-#cp u-boot/uboot.img $IMAGE_PATH/
-#cp u-boot/RK322XHMiniLoaderAll* $IMAGE_PATH/
-#cp u-boot/trust.img $IMAGE_PATH/
+mkdir -p $PACK_TOOL_DIR/rockdev/Image/
+cp -f $IMAGE_PATH/* $PACK_TOOL_DIR/rockdev/Image/
 
-#echo "copy kernel images"
-#cp kernel/resource.img $IMAGE_PATH/
-#cp kernel/kernel.img $IMAGE_PATH/
+echo "Make update.img"
+cd $PACK_TOOL_DIR/rockdev && ./mkupdate.sh
+if [ $? -eq 0 ]; then
+    echo "Make update image ok!"
+else
+    echo "Make update image failed!"
+    exit 1
+fi
+cd -
 
-#echo "copy manifest.xml"
-#cp manifest.xml $IMAGE_PATH/manifest_${DATE}.xml
-
-#echo "Make update.img"
-#cp RKTools/linux/Linux_Pack_Firmware/rockdev/* $IMAGE_PATH
-#cd $IMAGE_PATH && mkdir Image && ./mkupdate.sh
-#if [ $? -eq 0 ]; then
-#    echo "Make update image ok!"
-#else
-#    echo "Make update image failed!"
-#    exit 1
-#fi
-#rm Image -rf
-#cd -
+mv $PACK_TOOL_DIR/rockdev/update.img $IMAGE_PATH/
+rm $PACK_TOOL_DIR/rockdev/Image -rf
 
 mkdir -p $STUB_PATH
 
