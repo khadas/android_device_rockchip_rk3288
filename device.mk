@@ -15,6 +15,8 @@
 #
 
 PRODUCT_PACKAGES += \
+    memtrack.$(TARGET_BOARD_PLATFORM) \
+    WallpaperPicker \
     Launcher3
 
 #$_rbox_$_modify_$_zhengyang: add displayd
@@ -29,6 +31,11 @@ BOARD_USERDATAIMAGE_FILE_SYSTEM_TYPE := f2fs
 ifeq ($(HOST_OS),linux)
   TARGET_USERIMAGES_USE_F2FS := true
 endif
+
+PRODUCT_COPY_FILES += \
+    $(LOCAL_PATH)/init.${TARGET_BOARD_PLATFORM_PRODUCT}.rc:root/init.${TARGET_BOARD_PLATFORM_PRODUCT}.rc \
+    $(LOCAL_PATH)/init.rk30board.usb.rc:root/init.rk30board.usb.rc \
+    $(LOCAL_PATH)/wake_lock_filter.xml:system/etc/wake_lock_filter.xml
 
 ifeq ($(strip $(TARGET_BOARD_PLATFORM_PRODUCT)), box)
 BOARD_SEPOLICY_DIRS += \
@@ -45,10 +52,9 @@ else
     device/rockchip/rk3288/fstab.rk30board.bootmode.emmc:root/fstab.rk30board.bootmode.emmc
 endif
 
-PRODUCT_COPY_FILES += \
-    $(LOCAL_PATH)/init.${TARGET_BOARD_PLATFORM_PRODUCT}.rc:root/init.${TARGET_BOARD_PLATFORM_PRODUCT}.rc \
-    $(LOCAL_PATH)/init.rk30board.usb.rc:root/init.rk30board.usb.rc
 
+PRODUCT_COPY_FILES += \
+        device/rockchip/rk3399/package_performance.xml:system/etc/package_performance.xml
 # setup dalvik vm configs.
 $(call inherit-product, frameworks/native/build/tablet-10in-xhdpi-2048-dalvik-heap.mk)
 
