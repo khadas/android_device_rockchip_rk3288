@@ -54,7 +54,7 @@ endif
 
 
 PRODUCT_COPY_FILES += \
-        device/rockchip/rk3399/package_performance.xml:system/etc/package_performance.xml
+        device/rockchip/rk3288/package_performance.xml:system/etc/package_performance.xml
 # setup dalvik vm configs.
 $(call inherit-product, frameworks/native/build/tablet-10in-xhdpi-2048-dalvik-heap.mk)
 
