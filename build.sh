@@ -84,7 +84,7 @@ fi
 # build wifi ko
 echo "Start build wifi ko"
 lunch rk3288-userdebug
-#source device/rockchip/common/build_wifi_ko.sh
+source device/rockchip/common/build_wifi_ko.sh
 
 # build android
 echo "start build android"
