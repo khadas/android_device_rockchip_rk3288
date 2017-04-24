@@ -84,7 +84,7 @@ fi
 # build wifi ko
 echo "Start build wifi ko"
 lunch rk3288-userdebug
-source device/rockchip/common/build_wifi_ko.sh
+#source device/rockchip/common/build_wifi_ko.sh
 
 # build android
 echo "start build android"
@@ -138,7 +138,7 @@ mkdir -p $STUB_PATH
 
 #Generate patches
 
-.repo/repo/repo forall  -c '[ "$REPO_REMOTE" = "rk" ] && { REMOTE_DIFF=`git log $REPO_REMOTE/$REPO_RREV..HEAD`; LOCAL_DIFF=`git diff`; [ -n "$REMOTE_DIFF" ] && { mkdir -p $STUB_PATCH_PATH/$REPO_PATH/; git format-patch $REPO_REMOTE/$REPO_RREV..HEAD -o $STUB_PATCH_PATH/$REPO_PATH; git log -30 --graph --format=short $REPO_REMOTE/$REPO_RREV > $STUB_PATCH_PATH/$REPO_PATH/git-rev.log; } || :; [ -n "$LOCAL_DIFF" ] && { mkdir -p $STUB_PATCH_PATH/$REPO_PATH/; git reset HEAD ./; git diff > $STUB_PATCH_PATH/$REPO_PATH/local_diff.patch; } || :; }'
+.repo/repo/repo forall  -c '[ "$REPO_REMOTE" = "rk" ] && { REMOTE_DIFF=`git log $REPO_REMOTE/$REPO_RREV..HEAD`; LOCAL_DIFF=`git diff`; [ -n "$REMOTE_DIFF" ] && { mkdir -p $STUB_PATCH_PATH/$REPO_PATH/; git format-patch $REPO_REMOTE/$REPO_RREV..HEAD -o $STUB_PATCH_PATH/$REPO_PATH; git merge-base HEAD $REPO_REMOTE/$REPO_RREV | git show -s > $STUB_PATCH_PATH/$REPO_PATH/git-merge-base.txt; } || :; [ -n "$LOCAL_DIFF" ] && { mkdir -p $STUB_PATCH_PATH/$REPO_PATH/; git reset HEAD ./; git diff > $STUB_PATCH_PATH/$REPO_PATH/local_diff.patch; } || :; }'
 
 #Copy stubs
 cp manifest.xml $STUB_PATH/manifest_${DATE}.xml
