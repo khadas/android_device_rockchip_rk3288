@@ -6,3 +6,11 @@ on boot
     write /dev/cpuset/background/cpus 0
     write /dev/cpuset/system-background/cpus 0-1
     write /dev/cpuset/top-app/cpus 0-3
+
+    # gpu
+    chown system system /sys/class/devfreq/ffa30000.gpu/governor
+    chmod 0660 /sys/class/devfreq/ffa30000.gpu/governor
+
+    # ddr
+    chown system system /sys/class/devfreq/dmc/system_status
+    chmod 0660 /sys/class/devfreq/dmc/system_status

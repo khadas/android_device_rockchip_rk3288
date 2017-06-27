@@ -33,7 +33,7 @@ ifeq ($(HOST_OS),linux)
 endif
 
 PRODUCT_COPY_FILES += \
-    $(LOCAL_PATH)/init.${TARGET_BOARD_PLATFORM_PRODUCT}.rc:root/init.${TARGET_BOARD_PLATFORM_PRODUCT}.rc \
+    $(LOCAL_PATH)/init.rk3288.rc:root/init.rk3288.rc \
     $(LOCAL_PATH)/init.rk30board.usb.rc:root/init.rk30board.usb.rc \
     $(LOCAL_PATH)/wake_lock_filter.xml:system/etc/wake_lock_filter.xml
 
