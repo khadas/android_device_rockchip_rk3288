@@ -87,3 +87,7 @@ BOARD_TEMPERATURE_SENSOR_SUPPORT := false
 BOARD_USB_HOST_SUPPORT := true
 
 BOARD_USE_SPARSE_SYSTEM_IMAGE := true
+
+#for verifyboot, set to true open verifyboot,PRODUCT_FLASH_TYPE should check too
+PRODUCT_SYSTEM_VERITY := false
+PRODUCT_FLASH_TYPE := EMMC

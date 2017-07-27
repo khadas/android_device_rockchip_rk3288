@@ -26,3 +26,10 @@ on boot
     # ddr
     chown system system /sys/class/devfreq/dmc/system_status
     chmod 0660 /sys/class/devfreq/dmc/system_status
+
+on init
+    # Load persistent dm-verity state
+    verity_load_state
+
+on verity-logging
+    exec u:r:slideshow:s0 -- /sbin/slideshow warning/verity_red_1 warning/verity_red_2

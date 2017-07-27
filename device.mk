@@ -47,10 +47,38 @@ PRODUCT_COPY_FILES += \
     device/rockchip/rk3288/rk3288_box/init.rc:root/init.rc \
     device/rockchip/rk3288/fstab.rk30board.bootmode.unknown:root/fstab.rk30board.bootmode.unknown \
     device/rockchip/rk3288/rk3288_box/fstab.rk30board.bootmode.emmc:root/fstab.rk30board.bootmode.emmc
+endif
+
+
+ifeq ($(strip $(PRODUCT_SYSTEM_VERITY)), true)
+# add verity dependencies
+$(call inherit-product, build/target/product/verity.mk)
+PRODUCT_SUPPORTS_BOOT_SIGNER := false
+ifeq ($(strip $(PRODUCT_FLASH_TYPE)), EMMC)
+	PRODUCT_SYSTEM_VERITY_PARTITION := /dev/block/platform/ff0f0000.dwmmc/by-name/system
+	PRODUCT_SUPPORTS_VERITY_FEC := true
 else
-  PRODUCT_COPY_FILES += \
-    device/rockchip/rk3288/fstab.rk30board.bootmode.unknown:root/fstab.rk30board.bootmode.unknown \
-    device/rockchip/rk3288/fstab.rk30board.bootmode.emmc:root/fstab.rk30board.bootmode.emmc
+	PRODUCT_SYSTEM_VERITY_PARTITION := /dev/block/rknand_system
+	PRODUCT_SUPPORTS_VERITY_FEC := false
+endif
+# for warning
+PRODUCT_PACKAGES += \
+	slideshow \
+	verity_warning_images
+	
+PRODUCT_COPY_FILES += \
+	frameworks/native/data/etc/android.software.verified_boot.xml:system/etc/permissions/android.software.verified_boot.xml
+
+PRODUCT_COPY_FILES += \
+	device/rockchip/common/init.optee_verify.rc:root/init.optee.rc \
+	device/rockchip/rk3288/fstab.rk30board.forceencrypt.bootmode.unknown:root/fstab.rk30board.bootmode.unknown \
+	device/rockchip/rk3288/fstab.rk30board.forceencrypt.bootmode.emmc:root/fstab.rk30board.bootmode.emmc
+
+else
+PRODUCT_COPY_FILES += \
+	device/rockchip/common/init.optee.rc:root/init.optee.rc \
+	device/rockchip/rk3288/fstab.rk30board.bootmode.unknown:root/fstab.rk30board.bootmode.unknown \
+	device/rockchip/rk3288/fstab.rk30board.bootmode.emmc:root/fstab.rk30board.bootmode.emmc
 endif
 
 
