@@ -38,18 +38,6 @@ PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/init.rk30board.usb.rc:root/init.rk30board.usb.rc \
     $(LOCAL_PATH)/wake_lock_filter.xml:system/etc/wake_lock_filter.xml
 
-ifeq ($(strip $(TARGET_BOARD_PLATFORM_PRODUCT)), box)
-BOARD_SEPOLICY_DIRS += \
-      device/rockchip/rk3288/rk3288_box/sepolicy
-BOARD_SEPOLICY_UNION += \
-      service_contexts
-PRODUCT_COPY_FILES += \
-    device/rockchip/rk3288/rk3288_box/init.rc:root/init.rc \
-    device/rockchip/rk3288/fstab.rk30board.bootmode.unknown:root/fstab.rk30board.bootmode.unknown \
-    device/rockchip/rk3288/rk3288_box/fstab.rk30board.bootmode.emmc:root/fstab.rk30board.bootmode.emmc
-endif
-
-
 ifeq ($(strip $(PRODUCT_SYSTEM_VERITY)), true)
 # add verity dependencies
 $(call inherit-product, build/target/product/verity.mk)
@@ -65,20 +53,24 @@ endif
 PRODUCT_PACKAGES += \
 	slideshow \
 	verity_warning_images
-	
+
 PRODUCT_COPY_FILES += \
 	frameworks/native/data/etc/android.software.verified_boot.xml:system/etc/permissions/android.software.verified_boot.xml
 
 PRODUCT_COPY_FILES += \
 	device/rockchip/common/init.optee_verify.rc:root/init.optee.rc \
-	device/rockchip/rk3288/fstab.rk30board.forceencrypt.bootmode.unknown:root/fstab.rk30board.bootmode.unknown \
-	device/rockchip/rk3288/fstab.rk30board.forceencrypt.bootmode.emmc:root/fstab.rk30board.bootmode.emmc
+	device/rockchip/rk3288/fstab.rk30board.forceencrypt.bootmode.unknown.rk3288:root/fstab.rk30board.bootmode.unknown.rk3288 \
+	device/rockchip/rk3288/fstab.rk30board.forceencrypt.bootmode.unknown.rk3288w:root/fstab.rk30board.bootmode.unknown.rk3288w \
+	device/rockchip/rk3288/fstab.rk30board.forceencrypt.bootmode.emmc.rk3288:root/fstab.rk30board.bootmode.emmc.rk3288 \
+	device/rockchip/rk3288/fstab.rk30board.forceencrypt.bootmode.emmc.rk3288w:root/fstab.rk30board.bootmode.emmc.rk3288w
 
 else
 PRODUCT_COPY_FILES += \
 	device/rockchip/common/init.optee.rc:root/init.optee.rc \
-	device/rockchip/rk3288/fstab.rk30board.bootmode.unknown:root/fstab.rk30board.bootmode.unknown \
-	device/rockchip/rk3288/fstab.rk30board.bootmode.emmc:root/fstab.rk30board.bootmode.emmc
+	device/rockchip/rk3288/fstab.rk30board.bootmode.unknown.rk3288:root/fstab.rk30board.bootmode.unknown.rk3288 \
+	device/rockchip/rk3288/fstab.rk30board.bootmode.unknown.rk3288w:root/fstab.rk30board.bootmode.unknown.rk3288w \
+	device/rockchip/rk3288/fstab.rk30board.bootmode.emmc.rk3288:root/fstab.rk30board.bootmode.emmc.rk3288 \
+	device/rockchip/rk3288/fstab.rk30board.bootmode.emmc.rk3288w:root/fstab.rk30board.bootmode.emmc.rk3288w
 endif
 
 

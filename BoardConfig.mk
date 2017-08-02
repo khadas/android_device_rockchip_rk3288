@@ -91,3 +91,18 @@ BOARD_USE_SPARSE_SYSTEM_IMAGE := true
 #for verifyboot, set to true open verifyboot,PRODUCT_FLASH_TYPE should check too
 PRODUCT_SYSTEM_VERITY := false
 PRODUCT_FLASH_TYPE := EMMC
+
+TARGET_COPY_OUT_VENDOR := vendor
+#Calculate partition size from parameter.txt
+USE_DEFAULT_PARAMETER := $(shell test -f $(TARGET_DEVICE_DIR)/parameter.txt && echo true)
+ifeq ($(strip $(USE_DEFAULT_PARAMETER)), true)
+  BOARD_VENDORIMAGE_PARTITION_SIZE := $(shell python device/rockchip/common/get_partition_size.py $(TARGET_DEVICE_DIR)/parameter.txt vendor0)
+  #$(info Calculated BOARD_VENDORIMAGE_PARTITION_SIZE=$(BOARD_VENDORIMAGE_PARTITION_SIZE) use $(TARGET_DEVICE_DIR)/parameter.txt)
+else
+  BOARD_VENDORIMAGE_PARTITION_SIZE ?= 52428800
+  ifneq ($(strip $(TARGET_DEVICE_DIR)),)
+    #$(info $(TARGET_DEVICE_DIR)/parameter.txt not found! Use default BOARD_VENDORIMAGE_PARTITION_SIZE=$(BOARD_VENDORIMAGE_PARTITION_SIZE))
+  endif
+endif
+
+BOARD_VENDORIMAGE_FILE_SYSTEM_TYPE := ext4

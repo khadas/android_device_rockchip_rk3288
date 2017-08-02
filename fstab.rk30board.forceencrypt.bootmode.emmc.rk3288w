@@ -6,6 +6,7 @@
 /dev/block/platform/ff0f0000.dwmmc/by-name/system         /system             ext4      ro,noatime,nodiratime,noauto_da_alloc                                  wait,verify=/dev/block/platform/ff0f0000.dwmmc/by-name/metadata
 # use this line below instead to enable verity
 #/dev/block/platform/ff0f0000.rksdmmc/by-name/system         /system             ext4      ro,noatime,nodiratime,noauto_da_alloc                                  wait,check,verify
+/dev/block/platform/ff0f0000.dwmmc/by-name/vendor1          /vendor              ext4      ro,noatime,nodiratime,nosuid,nodev,noauto_da_alloc,discard                wait
 /dev/block/platform/ff0f0000.dwmmc/by-name/cache          /cache              ext4      noatime,nodiratime,nosuid,nodev,noauto_da_alloc,discard                wait,check
 /dev/block/platform/ff0f0000.dwmmc/by-name/metadata       /metadata           ext4      noatime,nodiratime,nosuid,nodev,noauto_da_alloc,discard                wait,check
 /dev/block/platform/ff0f0000.dwmmc/by-name/userdata       /data               f2fs      noatime,nodiratime,nosuid,nodev,discard,inline_xattr                   wait,check,notrim,forceencrypt=/metadata/key_file
