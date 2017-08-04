@@ -106,3 +106,6 @@ else
 endif
 
 BOARD_VENDORIMAGE_FILE_SYSTEM_TYPE := ext4
+
+# Enable optee service
+PRODUCT_HAVE_OPTEE := true
