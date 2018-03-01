@@ -27,11 +27,11 @@ TARGET_BOARD_PLATFORM_GPU ?= mali-t760
 # Choose a product to build for.  Look in the products directory for ones
 # that work.
 ifndef TARGET_PRODUCT
-TARGET_PRODUCT:=rk3288_vr
+TARGET_PRODUCT:=rk3288
 endif
 
 ifndef TARGET_DEVICE
-TARGET_DEVICE:=rk3288_vr
+TARGET_DEVICE:=rk3288
 endif
 
 # Choose a variant to build.  If you don't pick one, the default is eng.
@@ -115,4 +115,4 @@ endif
 # variable will be changed.  After you have modified this file with the new
 # changes (see buildspec.mk.default), update this to the new value from
 # buildspec.mk.default.
-BUILD_ENV_SEQUENCE_NUMBER := 10
+BUILD_ENV_SEQUENCE_NUMBER := 13

@@ -17,65 +17,76 @@
 PRODUCT_PACKAGES += \
     memtrack.$(TARGET_BOARD_PLATFORM) \
     WallpaperPicker \
-    Launcher3 \
-    Lightning
+    Launcher3
 
 #$_rbox_$_modify_$_zhengyang: add displayd
 PRODUCT_PACKAGES += \
-    displayd
+    displayd \
+    libion
 
-#enable this for support f2fs with data partion
+# Enable this for support f2fs with data partion
 BOARD_USERDATAIMAGE_FILE_SYSTEM_TYPE := f2fs
 
 # This ensures the needed build tools are available.
 # TODO: make non-linux builds happy with external/f2fs-tool; system/extras/f2fs_utils
-ifeq ($(HOST_OS),linux)
+ifeq ($(HOST_OS), linux)
   TARGET_USERIMAGES_USE_F2FS := true
 endif
 
 PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/init.rk3288.rc:root/init.rk3288.rc \
     $(LOCAL_PATH)/init.rk30board.usb.rc:root/init.rk30board.usb.rc \
-    $(LOCAL_PATH)/wake_lock_filter.xml:system/etc/wake_lock_filter.xml
-
-ifeq ($(strip $(PRODUCT_SYSTEM_VERITY)), true)
-# add verity dependencies
-$(call inherit-product, build/target/product/verity.mk)
-PRODUCT_SUPPORTS_BOOT_SIGNER := false
-ifeq ($(strip $(PRODUCT_FLASH_TYPE)), EMMC)
-	PRODUCT_SYSTEM_VERITY_PARTITION := /dev/block/platform/ff0f0000.dwmmc/by-name/system
-	PRODUCT_SUPPORTS_VERITY_FEC := true
-else
-	PRODUCT_SYSTEM_VERITY_PARTITION := /dev/block/rknand_system
-	PRODUCT_SUPPORTS_VERITY_FEC := false
-endif
-# for warning
-PRODUCT_PACKAGES += \
-	slideshow \
-	verity_warning_images
-
-PRODUCT_COPY_FILES += \
-	frameworks/native/data/etc/android.software.verified_boot.xml:system/etc/permissions/android.software.verified_boot.xml
-
-PRODUCT_COPY_FILES += \
-	device/rockchip/common/init.optee_verify.rc:root/init.optee.rc \
-	device/rockchip/rk3288/fstab.rk30board.forceencrypt.bootmode.unknown.rk3288:root/fstab.rk30board.bootmode.unknown.rk3288 \
-	device/rockchip/rk3288/fstab.rk30board.forceencrypt.bootmode.unknown.rk3288w:root/fstab.rk30board.bootmode.unknown.rk3288w \
-	device/rockchip/rk3288/fstab.rk30board.forceencrypt.bootmode.emmc.rk3288:root/fstab.rk30board.bootmode.emmc.rk3288 \
-	device/rockchip/rk3288/fstab.rk30board.forceencrypt.bootmode.emmc.rk3288w:root/fstab.rk30board.bootmode.emmc.rk3288w
-
-else
-PRODUCT_COPY_FILES += \
-	device/rockchip/common/init.optee.rc:root/init.optee.rc \
-	device/rockchip/rk3288/fstab.rk30board.bootmode.unknown.rk3288:root/fstab.rk30board.bootmode.unknown.rk3288 \
-	device/rockchip/rk3288/fstab.rk30board.bootmode.unknown.rk3288w:root/fstab.rk30board.bootmode.unknown.rk3288w \
-	device/rockchip/rk3288/fstab.rk30board.bootmode.emmc.rk3288:root/fstab.rk30board.bootmode.emmc.rk3288 \
-	device/rockchip/rk3288/fstab.rk30board.bootmode.emmc.rk3288w:root/fstab.rk30board.bootmode.emmc.rk3288w
-endif
-
+    $(LOCAL_PATH)/wake_lock_filter.xml:system/etc/wake_lock_filter.xml \
+    device/rockchip/$(TARGET_BOARD_PLATFORM)/package_performance.xml:$(TARGET_COPY_OUT_OEM)/etc/package_performance.xml \
+    device/rockchip/$(TARGET_BOARD_PLATFORM)/media_profiles_default.xml:$(TARGET_COPY_OUT_VENDOR)/etc/media_profiles_V1_0.xml
 
 # setup dalvik vm configs.
 $(call inherit-product, frameworks/native/build/tablet-10in-xhdpi-2048-dalvik-heap.mk)
 
+$(call inherit-product-if-exists, vendor/rockchip/$(TARGET_BOARD_PLATFORM)/device-vendor.mk)
 
-$(call inherit-product-if-exists, vendor/rockchip/rk3288/device-vendor.mk)
+# For enable optee support
+ifeq ($(strip $(PRODUCT_HAVE_OPTEE)), true)
+PRODUCT_COPY_FILES += \
+       device/rockchip/common/init.optee_verify.rc:root/init.optee.rc
+endif
+
+#
+# add Rockchip properties here
+#
+PRODUCT_PROPERTY_OVERRIDES += \
+                ro.ril.ecclist=112,911 \
+                ro.opengles.version=131072 \
+                wifi.interface=wlan0 \
+                rild.libpath=/system/lib/libril-rk29-dataonly.so \
+                rild.libargs=-d /dev/ttyACM0 \
+                persist.tegra.nvmmlite = 1 \
+                ro.audio.monitorOrientation=true \
+                debug.nfc.fw_download=false \
+                debug.nfc.se=false \
+                ro.rk.screenoff_time=60000 \
+                ro.rk.screenshot_enable=true \
+                ro.rk.def_brightness=200 \
+                ro.rk.homepage_base=http://www.google.com/webhp?client={CID}&amp;source=android-home \
+                ro.rk.install_non_market_apps=false \
+                sys.hwc.compose_policy=6 \
+                sys.wallpaper.rgb565=0 \
+                sf.power.control=2073600 \
+                sys.rkadb.root=0 \
+                ro.sf.fakerotation=false \
+                ro.sf.hwrotation=0 \
+                ro.rk.MassStorage=false \
+                ro.rk.systembar.voiceicon=true \
+                ro.rk.systembar.tabletUI=false \
+                ro.rk.LowBatteryBrightness=false \
+                ro.tether.denied=false \
+                sys.resolution.changed=false \
+                ro.default.size=100 \
+                ro.product.usbfactory=rockchip_usb \
+                wifi.supplicant_scan_interval=15 \
+                ro.factory.tool=0 \
+                ro.kernel.android.checkjni=0 \
+                ro.sf.lcd_density=160 \
+                ro.build.shutdown_timeout=0 \
+                debug.hwui.use_partial_updates=false \
+                persist.enable_task_snapshots=false

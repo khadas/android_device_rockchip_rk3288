@@ -15,62 +15,53 @@
 #
 
 # Use the non-open-source parts, if they're present
--include vendor/rockchip/rk3288/BoardConfigVendor.mk
+-include vendor/rockchip/common/BoardConfigVendor.mk
 -include device/rockchip/common/BoardConfig.mk
 
 TARGET_ARCH := arm
 TARGET_ARCH_VARIANT := armv7-a-neon
+TARGET_CPU_VARIANT := cortex-a15
 TARGET_CPU_ABI := armeabi-v7a
 TARGET_CPU_ABI2 := armeabi
-TARGET_CPU_VARIANT := cortex-a15
+ENABLE_CPUSETS := true
 TARGET_CPU_SMP := true
-PRODUCT_PACKAGE_OVERLAYS += device/rockchip/rk3288/overlay
+
+TARGET_PREBUILT_KERNEL := kernel/arch/arm/boot/zImage
+PRODUCT_PACKAGE_OVERLAYS += device/rockchip/$(TARGET_BOARD_PLATFORM)/overlay
 
 
 # Disable emulator for "make dist" until there is a 64-bit qemu kernel
 BUILD_EMULATOR := false
-TARGET_BOARD_PLATFORM := rk3288
+TARGET_BOARD_PLATFORM ?= rk3288
 TARGET_BOARD_PLATFORM_GPU := mali-t760
 BOARD_USE_DRM := true
+GRAPHIC_MEMORY_PROVIDER := dma_buf
+# RenderScript
+# OVERRIDE_RS_DRIVER := libnvRSDriver.so
+BOARD_OVERRIDE_RS_CPU_VARIANT_32 := cortex-a15
+# DISABLE_RS_64_BIT_DRIVER := false
+
+TARGET_USES_64_BIT_BCMDHD := false
+TARGET_USES_64_BIT_BINDER := false
+TARGET_PREFER_32_BIT := true
 
 # Sensors
-BOARD_SENSOR_ST := false
-BOARD_SENSOR_MPU := true
+BOARD_SENSOR_ST := true
+BOARD_SENSOR_MPU_VR := false
+BOARD_SENSOR_MPU_PAD := false
+
 BOARD_USES_GENERIC_INVENSENSE := false
 
+# Use HWC2
+TARGET_USES_HWC2 := true
 
-ifneq ($(filter %box, $(TARGET_PRODUCT)), )
-TARGET_BOARD_PLATFORM_PRODUCT ?= box
-else
- ifneq ($(filter %vr, $(TARGET_PRODUCT)), )
-   TARGET_BOARD_PLATFORM_PRODUCT ?= vr
-else
-TARGET_BOARD_PLATFORM_PRODUCT ?= tablet
-endif
-endif
-#######for target product ########
-ifeq ($(strip $(TARGET_BOARD_PLATFORM_PRODUCT)), box)
-DEVICE_PACKAGE_OVERLAYS += device/rockchip/rk3288/overlay_screenoff
 
-PRODUCT_PROPERTY_OVERRIDES += \
-        ro.target.product=box
-else
-  ifeq ($(strip $(TARGET_BOARD_PLATFORM_PRODUCT)), tablet)
-  PRODUCT_PROPERTY_OVERRIDES += \
-        ro.target.product=tablet
-  else
-     ro.target.product=vr
-  endif
-endif
-
-ENABLE_CPUSETS := true
-BOARD_SENSOR_MPU_PAD :=true
 # Enable dex-preoptimization to speed up first boot sequence
-ifeq ($(HOST_OS),linux)
-    ifeq ($(TARGET_BUILD_VARIANT),user)
+ifeq ($(HOST_OS), linux)
+    ifeq ($(TARGET_BUILD_VARIANT), user)
         WITH_DEXPREOPT := true
     else
-        WITH_DEXPREOPT := false
+        WITH_DEXPREOPT := true
     endif
 endif
 
@@ -86,26 +77,27 @@ BOARD_PRESSURE_SENSOR_SUPPORT := false
 BOARD_TEMPERATURE_SENSOR_SUPPORT := false
 BOARD_USB_HOST_SUPPORT := true
 
+# Enable optee service
+PRODUCT_HAVE_OPTEE ?= true
 BOARD_USE_SPARSE_SYSTEM_IMAGE := true
 
-#for verifyboot, set to true open verifyboot,PRODUCT_FLASH_TYPE should check too
-PRODUCT_SYSTEM_VERITY := false
-PRODUCT_FLASH_TYPE := EMMC
+# Google Service and frp overlay
+BUILD_WITH_GOOGLE_MARKET := false
+BUILD_WITH_GOOGLE_FRP := false
 
-TARGET_COPY_OUT_VENDOR := vendor
-#Calculate partition size from parameter.txt
-USE_DEFAULT_PARAMETER := $(shell test -f $(TARGET_DEVICE_DIR)/parameter.txt && echo true)
-ifeq ($(strip $(USE_DEFAULT_PARAMETER)), true)
-  BOARD_VENDORIMAGE_PARTITION_SIZE := $(shell python device/rockchip/common/get_partition_size.py $(TARGET_DEVICE_DIR)/parameter.txt vendor0)
-  #$(info Calculated BOARD_VENDORIMAGE_PARTITION_SIZE=$(BOARD_VENDORIMAGE_PARTITION_SIZE) use $(TARGET_DEVICE_DIR)/parameter.txt)
-else
-  BOARD_VENDORIMAGE_PARTITION_SIZE ?= 52428800
-  ifneq ($(strip $(TARGET_DEVICE_DIR)),)
-    #$(info $(TARGET_DEVICE_DIR)/parameter.txt not found! Use default BOARD_VENDORIMAGE_PARTITION_SIZE=$(BOARD_VENDORIMAGE_PARTITION_SIZE))
-  endif
-endif
+# Add widevine L3 support
+BOARD_WIDEVINE_OEMCRYPTO_LEVEL := 3
 
-BOARD_VENDORIMAGE_FILE_SYSTEM_TYPE := ext4
+# Config GO Optimization
+BUILD_WITH_GO_OPT := true
 
-# Enable optee service
-PRODUCT_HAVE_OPTEE := true
+# camera enable
+BOARD_CAMERA_SUPPORT := true
+
+# Config omx to support codec type.
+BOARD_SUPPORT_HEVC := false
+BOARD_SUPPORT_VP9 := false
+BOARD_SUPPORT_VP6 := false
+
+# enable SVELTE malloc
+MALLOC_SVELTE := true

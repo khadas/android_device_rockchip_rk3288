@@ -15,6 +15,4 @@
 #
 
 PRODUCT_MAKEFILES := \
-        $(LOCAL_DIR)/rk3288.mk \
-        $(LOCAL_DIR)/rk3288_box.mk \
-        $(LOCAL_DIR)/rk3288_vr.mk
+        $(LOCAL_DIR)/rk3288.mk

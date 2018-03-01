@@ -1,5 +1,4 @@
-#
-# Copyright 2014 The Android Open-Source Project
+# Copyright (C) 2014 The Android Open Source Project
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -12,17 +11,12 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
+
 #
-$(call inherit-product, device/rockchip/rk3288/rk3288.mk)
+# This file is the build configuration that is shared by all products
+# based on the rk3288 device
+#
+PRODUCT_RUNTIMES := runtime_libart_default
 
-
-PRODUCT_NAME := rk3288_box
-PRODUCT_DEVICE := rk3288_box
-PRODUCT_BRAND := Android
-PRODUCT_MODEL := rk3288_box
-PRODUCT_MANUFACTURER := rockchip
-
-PRODUCT_PROPERTY_OVERRIDES += \
-    ro.product.version = 1.0.0 \
-    ro.product.ota.host = www.rockchip.com:2300
+$(call inherit-product, device/rockchip/rk3288/device.mk)
 
