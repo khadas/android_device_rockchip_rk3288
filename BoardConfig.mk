@@ -89,7 +89,7 @@ BUILD_WITH_GOOGLE_FRP := false
 BOARD_WIDEVINE_OEMCRYPTO_LEVEL := 3
 
 # Config GO Optimization
-BUILD_WITH_GO_OPT := true
+BUILD_WITH_GO_OPT := false
 
 # camera enable
 BOARD_CAMERA_SUPPORT := true
