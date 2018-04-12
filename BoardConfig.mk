@@ -94,7 +94,7 @@ BUILD_WITH_GO_OPT := false
 BOARD_CAMERA_SUPPORT := true
 
 # Config omx to support codec type.
-BOARD_SUPPORT_HEVC := false
+BOARD_SUPPORT_HEVC := true
 BOARD_SUPPORT_VP9 := false
 BOARD_SUPPORT_VP6 := false
 
