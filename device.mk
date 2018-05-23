@@ -54,6 +54,9 @@ PRODUCT_COPY_FILES += \
        device/rockchip/common/init.optee_verify.rc:root/init.optee.rc
 endif
 
+PRODUCT_COPY_FILES += \
+    device/rockchip/rk3288/public.libraries.txt:vendor/etc/public.libraries.txt
+
 #
 # add Rockchip properties here
 #
