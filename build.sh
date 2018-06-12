@@ -111,6 +111,7 @@ else
     echo "Build android failed!"
     exit 1
 fi
+fi
 
 if [ "$BUILD_VARIANT" = user ] ; then
     if [ -e $PROJECT_TOP/build_back/system/build.prop ] ; then
@@ -118,6 +119,7 @@ if [ "$BUILD_VARIANT" = user ] ; then
         cp $PROJECT_TOP/build_back/system/build.prop $OUT/system/
     else
         echo "backup system/build.prop"
+        mkdir -p $PROJECT_TOP/build_back/system
         cp $OUT/system/build.prop $PROJECT_TOP/build_back/system/build.prop
     fi
     if [ -e $PROJECT_TOP/build_back/system/etc/prop.default ] ; then
@@ -125,6 +127,7 @@ if [ "$BUILD_VARIANT" = user ] ; then
         cp $PROJECT_TOP/build_back/system/etc/prop.default $OUT/system/etc/
     else
         echo "backup system/etc/prop.default"
+        mkdir -p $PROJECT_TOP/build_back/system/etc
         cp $OUT/system/etc/prop.default $PROJECT_TOP/build_back/system/etc/prop.default
     fi
     if [ -e $PROJECT_TOP/build_back/vendor/build.prop ] ; then
@@ -132,6 +135,7 @@ if [ "$BUILD_VARIANT" = user ] ; then
         cp $PROJECT_TOP/build_back/vendor/build.prop $OUT/vendor/
     else
         echo "backup vendor/build.prop"
+        mkdir -p $PROJECT_TOP/build_back/vendor
         cp $OUT/vendor/build.prop $PROJECT_TOP/build_back/vendor/build.prop
     fi
     if [ -e $PROJECT_TOP/build_back/vendor/default.prop ] ; then
@@ -139,9 +143,9 @@ if [ "$BUILD_VARIANT" = user ] ; then
         cp $PROJECT_TOP/build_back/vendor/default.prop $OUT/vendor/
     else
         echo "backup vendor/default.prop"
+        mkdir -p $PROJECT_TOP/build_back/vendor
         cp $OUT/vendor/default.prop $PROJECT_TOP/build_back/vendor/default.prop
     fi
-fi
 fi
 
 # mkimage.sh
@@ -154,6 +158,7 @@ else
     exit 1
 fi
 
+# build ota_package
 if [ "$BUILD_OTA" = true ] ; then
     INTERNAL_OTA_PACKAGE_OBJ_TARGET=obj/PACKAGING/target_files_intermediates/$TARGET_PRODUCT-target_files-*.zip
     INTERNAL_OTA_PACKAGE_TARGET=$TARGET_PRODUCT-ota-*.zip
@@ -164,6 +169,7 @@ if [ "$BUILD_OTA" = true ] ; then
     cp $OUT/$INTERNAL_OTA_PACKAGE_OBJ_TARGET $IMAGE_PATH/
 fi
 
+# build update_image
 if [ "$BUILD_UPDATE_IMG" = true ] ; then
 	mkdir -p $PACK_TOOL_DIR/rockdev/Image/
 	cp -f $IMAGE_PATH/* $PACK_TOOL_DIR/rockdev/Image/
@@ -176,7 +182,8 @@ if [ "$BUILD_UPDATE_IMG" = true ] ; then
 		echo "Make update image failed!"
 		exit 1
 	fi
-	
+
+	cd -
 	mv $PACK_TOOL_DIR/rockdev/update.img $IMAGE_PATH/
 	rm $PACK_TOOL_DIR/rockdev/Image -rf
 fi
