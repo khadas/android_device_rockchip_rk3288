@@ -154,5 +154,5 @@
          is true (in that case this is assumed true as well).  It can allow you to tune down
          your device's memory use without going to the point of causing applications to turn
          off features. -->
-    <bool name="config_avoidGfxAccel">true</bool>
+    <bool name="config_avoidGfxAccel">false</bool>
 </resources>
