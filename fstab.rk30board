@@ -13,6 +13,5 @@
 /dev/block/zram0                                none                swap      defaults                                              zramsize=50%
 # For sdmmc
 /devices/platform/ff0c0000.dwmmc/mmc_host*        auto  auto    defaults        voldmanaged=sdcard1:auto
-# Because the performance of rk3288 is less than required,
-# 3288 default closing data-encrypt.
-/dev/block/by-name/userdata       /data               f2fs      noatime,nodiratime,nosuid,nodev,discard,inline_xattr                   wait,check,notrim,encryptable=/metadata/key_file
+# 3288 default opening data-encrypt.
+/dev/block/by-name/userdata       /data               f2fs      noatime,nodiratime,nosuid,nodev,discard,inline_xattr                   wait,check,notrim,forceencrypt=/metadata/key_file
