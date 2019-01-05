@@ -29,6 +29,8 @@ TARGET_CPU_SMP := true
 TARGET_PREBUILT_KERNEL := kernel/arch/arm/boot/zImage
 PRODUCT_PACKAGE_OVERLAYS += device/rockchip/$(TARGET_BOARD_PLATFORM)/overlay
 
+IS_UPGRADE_TO_P := false
+BOARD_AVB_ENABLE := false
 
 # Disable emulator for "make dist" until there is a 64-bit qemu kernel
 BUILD_EMULATOR := false
@@ -42,7 +44,7 @@ BOARD_OVERRIDE_RS_CPU_VARIANT_32 := cortex-a15
 # DISABLE_RS_64_BIT_DRIVER := false
 
 TARGET_USES_64_BIT_BCMDHD := false
-TARGET_USES_64_BIT_BINDER := false
+TARGET_USES_64_BIT_BINDER := true
 TARGET_PREFER_32_BIT := true
 
 # Sensors
@@ -53,7 +55,6 @@ BOARD_USES_GENERIC_INVENSENSE := false
 
 # Use HWC2
 TARGET_USES_HWC2 := true
-
 
 # Enable dex-preoptimization to speed up first boot sequence
 ifeq ($(HOST_OS), linux)

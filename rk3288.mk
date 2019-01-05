@@ -14,9 +14,9 @@
 # limitations under the License.
 #
 $(call inherit-product, $(SRC_TARGET_DIR)/product/full_base.mk)
-include device/rockchip/$(TARGET_BOARD_PLATFORM)/BoardConfig.mk
+include device/rockchip/rk3288/BoardConfig.mk
 # Inherit from those products. Most specific first.
-$(call inherit-product, device/rockchip/$(TARGET_BOARD_PLATFORM)/device.mk)
+$(call inherit-product, device/rockchip/rk3288/device.mk)
 $(call inherit-product, device/rockchip/common/device.mk)
 
 PRODUCT_CHARACTERISTICS := tablet
