@@ -15,4 +15,4 @@
 # For sdmmc
 /devices/platform/ff0c0000.dwmmc/mmc_host*        auto  auto    defaults        voldmanaged=sdcard1:auto
 # 3288 default opening data-encrypt.
-/dev/block/by-name/userdata       /data               f2fs      noatime,nodiratime,nosuid,nodev,discard,inline_xattr                   wait,check,notrim,forceencrypt=/metadata/key_file
+/dev/block/by-name/userdata       /data               f2fs      noatime,nodiratime,nosuid,nodev,discard,inline_xattr                   wait,check,notrim,forceencrypt=/cache/key_file,quota,reservedsize=128M
