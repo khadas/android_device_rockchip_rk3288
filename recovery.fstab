@@ -2,7 +2,7 @@
 #<src>                                       <mnt_point>         <type>    <mnt_flags and options>       <fs_mgr_flags>
 /dev/block/platform/1021c000.dwmmc/by-name/user                  /mnt/internal_sd     vfat             defaults                  defaults
 /dev/block/mmcblk0p1                                               /mnt/external_sd     vfat             /dev/block/mmcblk0                  defaults
-/dev/block/by-name/system                /system              ext4             defaults                  defaults
+/dev/block/by-name/system                /                    ext4             defaults                  defaults
 /dev/block/by-name/vendor                /vendor              ext4             defaults                  defaults
 /dev/block/by-name/oem                   /oem                 ext4             defaults                  defaults
 /dev/block/by-name/cache                 /cache               ext4             defaults                  defaults
