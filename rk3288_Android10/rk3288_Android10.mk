@@ -13,19 +13,32 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 #
+
+# First lunching is Q, api_level is 29
+PRODUCT_SHIPPING_API_LEVEL := 29
+PRODUCT_FSTAB_TEMPLATE := $(LOCAL_PATH)/fstab.in
+PRODUCT_DTBO_TEMPLATE := $(LOCAL_PATH)/dt-overlay.in
+PRODUCT_BOOT_DEVICE := ff0f0000.dwmmc
+PRODUCT_SDMMC_DEVICE := ff0c0000.dwmmc 
+include device/rockchip/common/build/rockchip/DynamicPartitions.mk
+include device/rockchip/common/BoardConfig.mk
+include device/rockchip/rk3288/rk3288_Android10/BoardConfig.mk
 $(call inherit-product, $(SRC_TARGET_DIR)/product/full_base.mk)
-include device/rockchip/rk3288/BoardConfig.mk
 # Inherit from those products. Most specific first.
 $(call inherit-product, device/rockchip/rk3288/device.mk)
 $(call inherit-product, device/rockchip/common/device.mk)
 
+#enable this for support f2fs with data partion
+BOARD_USERDATAIMAGE_FILE_SYSTEM_TYPE := ext4
+
 PRODUCT_CHARACTERISTICS := tablet
 
-PRODUCT_NAME := rk3288
-PRODUCT_DEVICE := rk3288
+PRODUCT_NAME := rk3288_Android10
+PRODUCT_DEVICE := rk3288_Android10
 PRODUCT_BRAND := rockchip
-PRODUCT_MODEL := rk3288
+PRODUCT_MODEL := rk3288-Android10
 PRODUCT_MANUFACTURER := rockchip
+PRODUCT_AAPT_PREF_CONFIG := hdpi
 
 PRODUCT_PACKAGES += \
     SoundRecorder
@@ -35,4 +48,7 @@ PRODUCT_COPY_FILES += vendor/rockchip/common/phone/etc/apns-full-conf.xml:system
 PRODUCT_COPY_FILES += vendor/rockchip/common/phone/etc/spn-conf.xml:system/etc/spn-conf.xml
 PRODUCT_PROPERTY_OVERRIDES += \
     ro.product.version = 1.0.0 \
-    ro.product.ota.host = www.rockchip.com:2300
+    ro.product.ota.host = www.rockchip.com:2300 \
+    ro.sf.lcd_density=280
+
+PRODUCT_HAVE_OPTEE := true

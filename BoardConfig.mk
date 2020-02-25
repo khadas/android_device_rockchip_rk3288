@@ -16,7 +16,6 @@
 
 # Use the non-open-source parts, if they're present
 -include vendor/rockchip/common/BoardConfigVendor.mk
--include device/rockchip/common/BoardConfig.mk
 
 TARGET_ARCH := arm
 TARGET_ARCH_VARIANT := armv7-a-neon
@@ -26,11 +25,17 @@ TARGET_CPU_ABI2 := armeabi
 ENABLE_CPUSETS := true
 TARGET_CPU_SMP := true
 
+PRODUCT_KERNEL_ARCH := arm
 TARGET_PREBUILT_KERNEL := kernel/arch/arm/boot/zImage
-PRODUCT_PACKAGE_OVERLAYS += device/rockchip/$(TARGET_BOARD_PLATFORM)/overlay
+BOARD_PREBUILT_DTBIMAGE_DIR := kernel/arch/arm/boot/dts
+PRODUCT_KERNEL_DTS ?= rk3288-evb-android-rk808-edp-avb
+PRODUCT_KERNEL_CONFIG ?= rockchip_defconfig android-10.config
+PRODUCT_UBOOT_CONFIG ?= rk3288
 
 IS_UPGRADE_TO_P := false
 BOARD_AVB_ENABLE := false
+BOARD_AVB_METADATA_BIN_PATH := \
+   external/avb/test/data/atx_metadata.bin
 
 # Disable emulator for "make dist" until there is a 64-bit qemu kernel
 BUILD_EMULATOR := false
@@ -87,6 +92,12 @@ BUILD_WITH_GOOGLE_FRP := false
 
 # Add widevine L3 support
 BOARD_WIDEVINE_OEMCRYPTO_LEVEL := 3
+
+ifeq ($(strip $(BOARD_USES_AB_IMAGE)), true)
+    DEVICE_MANIFEST_FILE := device/rockchip/rk3288/manifest_ab.xml
+else
+    DEVICE_MANIFEST_FILE := device/rockchip/rk3288/manifest.xml
+endif
 
 # Config GO Optimization
 BUILD_WITH_GO_OPT := false
