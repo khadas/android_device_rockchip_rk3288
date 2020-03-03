@@ -104,6 +104,7 @@ BUILD_WITH_GO_OPT := false
 
 # camera enable
 BOARD_CAMERA_SUPPORT := true
+BOARD_CAMERA_SUPPORT_EXT := true
 
 # Config omx to support codec type.
 BOARD_SUPPORT_HEVC := true
