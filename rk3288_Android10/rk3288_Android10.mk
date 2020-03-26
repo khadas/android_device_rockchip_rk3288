@@ -27,9 +27,6 @@ $(call inherit-product, $(SRC_TARGET_DIR)/product/full_base.mk)
 $(call inherit-product, device/rockchip/rk3288/device.mk)
 $(call inherit-product, device/rockchip/common/device.mk)
 
-#enable this for support f2fs with data partion
-BOARD_USERDATAIMAGE_FILE_SYSTEM_TYPE := ext4
-
 PRODUCT_CHARACTERISTICS := tablet
 
 PRODUCT_NAME := rk3288_Android10
