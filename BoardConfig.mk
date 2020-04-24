@@ -39,7 +39,7 @@ BOARD_AVB_METADATA_BIN_PATH := \
 
 # Disable emulator for "make dist" until there is a 64-bit qemu kernel
 BUILD_EMULATOR := false
-TARGET_BOARD_PLATFORM ?= rk3288
+TARGET_BOARD_PLATFORM := rk3288
 TARGET_BOARD_PLATFORM_GPU := mali-t760
 BOARD_USE_DRM := true
 GRAPHIC_MEMORY_PROVIDER := dma_buf
