@@ -661,9 +661,11 @@
     -->
     <VideoDecoderCap name="wmv" enabled="false"/>
     <AudioDecoderCap name="wma" enabled="false"/>
+    <!--
     <VideoEditorCap  maxInputFrameWidth="1920"
         maxInputFrameHeight="1080" maxOutputFrameWidth="1920"
         maxOutputFrameHeight="1080" maxPrefetchYUVFrames="1"/>
+    -->
     <!--
         The VideoEditor Export codec profile and level values
         correspond to the values in OMX_Video.h.
@@ -675,13 +677,13 @@
     <!--
       Codec = h.264, Hp-High profile, level 4.1
     -->
-    <ExportVideoProfile name="h264" profile= "4" level="4096"/>
+    <!--ExportVideoProfile name="h264" profile= "4" level="4096"/-->
     <!--
       Codec = h.263, Baseline profile, level 0
     -->
-    <ExportVideoProfile name="h263" profile= "1" level="1"/>
+    <!--ExportVideoProfile name="h263" profile= "1" level="1"/-->
     <!--
       Codec = mpeg4, Simple profile, level 3
     -->
-    <ExportVideoProfile name="m4v" profile= "1" level="16"/>
+    <!--ExportVideoProfile name="m4v" profile= "1" level="16"/-->
 </MediaSettings>
